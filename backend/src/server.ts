@@ -70,6 +70,11 @@ app.post('/analyze', upload.single('image'), async (req: Request, res: Response)
 // Convert PORT from string to number
 const PORT = Number(process.env.PORT) || 4000;
 
+app.get('/', (_req: Request, res: Response) => {
+  res.send('Backend is running! Use /analyze endpoint for predictions.');
+});
+
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend running on port ${PORT}`);
   if (process.env.RENDER_EXTERNAL_URL) {
