@@ -25,7 +25,12 @@ app.post('/analyze', upload.single('image'), async (req: Request, res: Response)
       return res.status(400).json({ error: 'Image file is required' })
     }
 
-    const mlServiceUrl = process.env.ML_SERVICE_URL || 'http://127.0.0.1:8001/analyze'
+    const mlServiceUrl = process.env.ML_SERVICE_URL;
+    if (!mlServiceUrl) {
+   console.error('ML_SERVICE_URL is not defined');
+   return res.status(500).json({ error: 'ML service not configured' });
+}
+
     const response = await axios.post(mlServiceUrl, req.file.buffer, {
       headers: { 'Content-Type': 'application/octet-stream' },
       timeout: 30000,
@@ -62,8 +67,13 @@ app.post('/analyze', upload.single('image'), async (req: Request, res: Response)
   }
 })
 
-const port = process.env.PORT || 4000
-app.listen(port, () => {
-  console.log(`Backend running on http://localhost:${port}`)
-})
+// Convert PORT from string to number
+const PORT = Number(process.env.PORT) || 4000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend running on port ${PORT}`);
+  if (process.env.RENDER_EXTERNAL_URL) {
+    console.log(`Public URL: ${process.env.RENDER_EXTERNAL_URL}`);
+  }
+});
 

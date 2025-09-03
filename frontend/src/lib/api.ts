@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001';
 export async function analyzeImage(input: Blob | string) {
   const form = new FormData()
   if (typeof input === 'string') {
