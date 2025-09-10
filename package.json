@@ -7,10 +7,10 @@
     "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev",
     "ml": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { Set-Location ml_service; if (!(Test-Path .venv)) { python -m venv .venv }; .\\.venv\\Scripts\\python -m uvicorn main:app --host 127.0.0.1 --port 8000 }\"",
-    "build": "npm --prefix backend run build && npm --prefix frontend run build",
-    "start": "npm --prefix backend start"
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend start"
   },
-  "devDependencies": {
+  "dependencies": {
     "npm-run-all": "^4.1.5"
   }
 }
