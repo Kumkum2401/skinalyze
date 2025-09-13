@@ -7,7 +7,7 @@
 </div>
 
 
-## 🌟 link
+## 🔗 link
 https://skinalyze-one.vercel.app/
 
 ## 🌟 Features
